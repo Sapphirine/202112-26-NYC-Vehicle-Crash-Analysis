@@ -17,9 +17,13 @@ In this project, we have used:
 - [Motor vehicle crash dataset](https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95) from NYC Open data.
 - Weather data from [wundergound](https://www.wunderground.com).
 We first performed a historical load of both of these datasets starting from 2012. When the pipeline executes daily, the incremental load for both of these datasets takes place.
+
 ## System Architecture
 
 ![Alt text](system_arch.png "System architecture")
+
+## Configurable environment variables
+Set 'database_url' and 'gmaps_key' environment variables before running the code files.
 
 ## Organization of this directory
 
