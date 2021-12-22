@@ -1,0 +1,13 @@
+{
+  "series": [{
+    "type": "PieSeries",
+    "dataFields": {
+      "value": "crashes",
+      "category": "boroughs"
+    }
+  }],
+  "dataSource" : {
+    "url": "json/data.json"
+  },
+  "legend": {}
+}

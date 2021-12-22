@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Visualizations</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <script type="text/javascript" src="json/heatmap.json"></script>
+  </head>
+
+  <body onload="load()">
+  <div id="banner">
+    <h3>New York City Crash Analysis</h3>
+  </div>
+  <div class="tab">
+  <button class="tablinks" onclick="clickHandle(event, 'am_charts')">AM Maps</button>
+  <button class="tablinks" onclick="clickHandle(event, 'hmap')">Heatmaps</button>
+<!--  <button class="tablinks" onclick="clickHandle(event, 'metabase')">Metabase</button>-->
+  </div>
+
+  <div id="am_charts" class = 'tabcontent'  style ="display:block">
+<!--    <h4><strong>The data is sourced from NYC Open data and exists from July 2012</strong></h4>-->
+    <div id="chart-wrapper">
+      <div class="graph-wrapper">
+        <p>The below visualisations have been created using AMCharts. The data used is from NYC's Open Data website and it is maintained by the NYPD.
+        The data is from July 2012 onwards for the 5 boroughs of NYC - Brooklyn, Bronx, Manhattan, Queens, Staten Island. The vizualisations can be annotated and dynamically refreshed by clicking on the labels.</p>
+        <h4>Running Bar Chart showing distribution of crashes across boroughs over time</h4>
+        <div id="am_running_bar_chart">
+          <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+          <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+          <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+          <script src="js/am_bar_chart_race.js"></script>
+        </div>
+        <p>
+          Brooklyn has had the most accidents till date , followed by Queens, Manhattan & Bronx. Staten Island has the fewest number of crashes.
+          An interesting analysis as an outcome of this vizualisation was done to identify the most dangerous boroughs in terms of population density & land area  .
+        </p>
+      </div>
+      <div class="graph-wrapper">
+        <p> In terms of population density(persons/sq mile), Staten island is the most sparesly populated borough(8618 persons/sq mile). Queens has a population density of 22125 persons/sq mile, followed by Bronx(34920 persons/sq mile) & Brooklyn (39438 persons/sq mile).
+          Manhattan is the most densely populated borough with a population density of 74,781 persons/sq mile, which is almost double the population density of the next populous borough.</p>
+        <h4>Bar chart of distribution of crashes based on population density</h4>
+        <div id = 'am_bar_1'>
+          <script src="https://www.amcharts.com/lib/4/core.js"></script>
+          <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+          <script src="js/am_bar_1.js"></script>
+        </div>
+        <p>
+          After taking the population density into account, we can see that Manhattan has the lowest crashes density, while Queens has the highest.
+          <br><br>
+          A further deep dive into the car ownership & commute preferences of workers from different boroughs explains the above graph. Based on <a href="http://blog.tstc.org/wp-content/uploads/2017/04/how-car-free-is-nyc.pdf">here</a>
+          , 76.6%(highest amongst all boroughs) of households in Manhattan are car free & only 5.8%(lowest amongst all boroughs) of workers drive to work . On the other hand, Queens only has 36.2% of households that are car free and 32% of workers drive to work.
+          So it is clear that commuters in Manhattan prefer not to drive and own cars and hence Manhattan is the safest borough in terms of accident density(per person/sq mile), whereas Queens is the most dangerous one.
+
+          <br><br>
+          In terms of land area , Manhattan is the smallest borough(22.7 sq miles) , followed by Bronx(42.2 sq miles), Staten Island(57.5 sq miles), Brooklyn(69.4 sq miles) & Queens(108.7 sq miles).
+          While Brooklyn has the highest number of absolute crashes, Manhattan has the highest accident density per sq mile followed by Bronx.
+          Brooklyn is next although it's accident density per sq mile is less than half that of Manhattan.  Queens is the largest borough, but it still has a much lesser accident density(1/4th of Manhattan) than all boroughs but Staten Island.
+        </p>
+      </div>
+
+       <div class="graph-wrapper">
+        <p>An average work day in New York starts between 8am-10am and ends between 4pm-6pm. Monday - Friday are the average working days. The below heatmap explains how the distribution of crashes varies with hour of the day as well as day of the week </p>
+        <h4>Heat map showing distribution of crashes over day of week and hour of day</h4>
+        <div id = 'am_heatmap'>
+          <script src="https://www.amcharts.com/lib/4/core.js"></script>
+          <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+          <script src="js/am_heatmap.js"></script>
+        </div>
+        <p>
+          We can see that most crashes occur during the peak travel hours. We see that highest accidents occur between 4pm - 6pm, when most workers would be commuting back home.
+          A deep dive into the reason for crashes occuring during 4pm -6pm shows that he most common reasons for the collisions is Driver Inattention/Distraction & Fatigued/Drowsy .
+          This is explained by workers being fatigued post completion of work days.
+          <br><br> Another interesting result on deep diving into the crashes happening between 12 am and 5am shows that Alcohol involvement is the major contributor to crashes occuring.
+          <br> While Saturday and Sunday usually have fewer collisions being weekends, we can still see that between 1pm-4pm, the distriubtion of crashes is really high. This is because most people usually most people go out on weekend around this time.
+        </p>
+      </div>
+      <div class="graph-wrapper">
+        <h4>Donut Pie Chart showing distribution of crashes across type of vehicle</h4>
+         <div id = 'am_donut'>
+            <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+          <script src="js/am_donut_pie.js"></script>
+        </div>
+        <p>
+          There is no surprise that Sedans and SUVs contribute to the significant share of crashes since they contribute the most to vehicles on road.
+          Amongst the commercial vehicles, taxis contribute to around 35% of the crashes , followed by Pick up trucks(18%) & Buses(14%).
+          <br> <br>
+          Motorcycles and Bikes are involved only in 1% of all crashes. The surprising find on deep diving into their data is that while intuitively you would expect two-wheeler collision to be more lethal than bigger vehicles, this is not the case actually. Only 1% of collision involving two-wheelers lead to a person being killed.
+          <br> <br>
+
+          Ambulances are also involved in accidents , however 15% of accidents in which an ambulance is involved does not involve any other vehicle. These accidents occur mostly due to Driver Inattention/Distraction or Passing Too Closely or Obstructed View of the driver
+        </p>
+      </div>
+      <div class="graph-wrapper">
+        <p>The below clustered column graph can be used to analyse the distribution of injuries and deaths involved in accidents</p>
+        <h4>Clustered Column Graph showing distribution of collision related deaths & injuries over time</h4>
+         <div id = 'am_clustered'>
+          <script src="js/am_stacked_column_chart.js"></script>
+        </div>
+        <p>
+          From the vizualisation above, we can see that firstly identify a common trend in each year. Motorist injuries contribute the most to injuries/crashes(~70-75%),
+          followed by Pedestrian injuries(~14-21%) and cyclist injuries(~7-10).
+          <br><br>
+          The deaths involved in the accident are obviously fewer in comparasion to the injuries, so we can click on the killed labels on the graph and just analyse the accidents involving deaths.
+          On doing that, we identify a similar trend that pedestrian deaths are the least proportion ( ~5-13%) followed by cyclist deaths(~8 to 24), followed by motorist deaths(~65-82)
+        </p>
+      </div>
+
+       <div class="graph-wrapper">
+        <h4>Distribution of Crashes over Boroughs</h4>
+         <div id = 'chartdiv'>
+          <script src="js/script.js"></script>
+        </div>
+        <p>
+          The simple pie chart above gives the distribution of crashes over boroughs
+        </p>
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+    <div id ='hmap' class = 'tabcontent' >
+      <div id="floating-panel" >
+        <button id="toggle-heatmap">Toggle Heatmap</button>
+        <button id="change-gradient">Change gradient</button>
+        <button id="change-radius">Change radius</button>
+        <button id="change-opacity">Change opacity</button>
+      </div>
+      <div id ='map_container'>
+        <div class="map_box">
+          <div id="map_brooklyn" class = 'maps'>
+          </div>
+          <p>Brooklyn</p>
+        </div>
+        <div class="map_box">
+          <div id="map_bronx" class = 'maps'>
+          </div>
+          <p>Bronx</p>
+        </div>
+        <div class="map_box">
+          <div id="map" class = 'maps' >
+          </div>
+          <p>Manhattan</p>
+        </div>
+        <div class="map_box">
+          <div id="map_queens" class = 'maps'>
+          </div>
+          <p>Queens</p>
+        </div>
+        <div class="map_box">
+          <div id="map_staten" class = 'maps'>
+          </div>
+          <p>Staten Island</p>
+        </div>
+
+      </div>
+    </div>
+          <script src="js/heatmap.js"></script>
+      <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzyqHsPHlvu_0bu2HEDQCv0DtUwvWokmE&libraries=visualization&libraries=visualization&callback=initMap">
+      </script>
+
+
+
+<!--    <div id="metabase" class="tabcontent" style ="display:none">-->
+<!--      <iframe-->
+<!--        src="http://146.148.47.47:3000/public/dashboard/7fc0c36b-ecc0-416d-a69f-5ba3c4027145"-->
+<!--        frameborder="0"-->
+<!--        width=100%-->
+<!--        height="600"-->
+<!--        allowtransparency-->
+<!--    ></iframe></div>-->
+
+
+  <script>
+function clickHandle(evt, animalName) {
+  let i, tabcontent, tablinks;
+
+  // This is to clear the previous clicked content.
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Set the tab to be "active".
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Display the clicked tab and set it to active.
+  document.getElementById(animalName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+
+
+  </body>
+</html>
+

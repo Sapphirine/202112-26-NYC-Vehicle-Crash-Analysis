@@ -1,0 +1,11 @@
+pandas
+numpy
+sqlachemy
+googlemaps
+geopy
+bs4
+psycopg2
+psycopg2-binary
+sklearn
+matplotlib
+tensorflow
